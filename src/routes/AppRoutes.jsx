@@ -58,7 +58,10 @@ export default function AppRoutes() {
         <Route path="account/profile" element={<ProfileSettings />} />
 
         <Route path="support" element={<HelpCenter />} />
-        <Route path="support/return-exchange" element={<ReturnExchangeWizard />} />
+        <Route
+          path="support/return-exchange"
+          element={<ReturnExchangeWizard />}
+        />
 
         <Route path="empty-state" element={<EmptyStateShowcase />} />
 
