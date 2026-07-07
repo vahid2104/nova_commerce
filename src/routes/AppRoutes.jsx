@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import AccountLayout from "../layouts/AccountLayout";
 import MainLayout from "../layouts/MainLayout";
 
 import Home from "../pages/Home";
@@ -54,7 +55,9 @@ export default function AppRoutes() {
         <Route path="account/orders" element={<OrderHistory />} />
         <Route path="account/orders/:id" element={<OrderDetailTracking />} />
         <Route path="account/addresses" element={<AddressesPaymentMethods />} />
-        <Route path="account/wishlist" element={<Wishlist />} />
+        <Route element={<AccountLayout />}>
+          <Route path="account/wishlist" element={<Wishlist />} />
+        </Route>
         <Route path="account/profile" element={<ProfileSettings />} />
 
         <Route path="support" element={<HelpCenter />} />
