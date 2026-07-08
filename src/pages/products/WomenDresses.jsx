@@ -202,7 +202,6 @@ function ProductCard({ p }) {
   return (
     <div className="group cursor-pointer max-w-[260px] mx-auto">
       {" "}
-      {/* ölçü böyüdü */}
       <div className="relative aspect-[3/4] bg-white overflow-hidden mb-3">
         <img src={p.img} alt={p.name} className="w-full h-full object-cover" />
         {p.badge && (
@@ -562,7 +561,6 @@ export default function WomenDresses() {
               )}
             </div>
 
-            {/* Grid – 4 məhsul, col sayı 3, şəkillər böyük, məsafə azaldıldı */}
             <div
               className={`grid ${
                 viewMode === "grid"
