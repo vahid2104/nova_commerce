@@ -10,6 +10,7 @@ import ProductDetail from "../pages/products/ProductDetail";
 import SearchResults from "../pages/products/SearchResults";
 import BrandStore from "../pages/products/BrandStore";
 import FlashSale from "../pages/products/FlashSale";
+import WomenDresses from "../pages/products/WomenDresses";
 
 import ShoppingCart from "../pages/cart/ShoppingCart";
 
@@ -42,6 +43,7 @@ export default function AppRoutes() {
         <Route path="search" element={<SearchResults />} />
         <Route path="brand/:brandSlug" element={<BrandStore />} />
         <Route path="flash-sale" element={<FlashSale />} />
+        <Route path="women/dresses" element={<WomenDresses />} />
 
         <Route path="cart" element={<ShoppingCart />} />
 
