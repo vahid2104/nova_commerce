@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+// İkonlar (əvvəlki kimi)
 const IconLayoutGrid = ({ size = 16 }) => (
   <svg
     width={size}
@@ -135,6 +136,7 @@ const IconBag = ({ size = 18 }) => (
   </svg>
 );
 
+// YALNIZ 4 MƏHSUL (id 5 və 6 silindi)
 const products = [
   {
     id: 1,
@@ -200,6 +202,7 @@ function ProductCard({ p }) {
   return (
     <div className="group cursor-pointer max-w-[260px] mx-auto">
       {" "}
+      {/* ölçü böyüdü */}
       <div className="relative aspect-[3/4] bg-white overflow-hidden mb-3">
         <img src={p.img} alt={p.name} className="w-full h-full object-cover" />
         {p.badge && (
@@ -337,7 +340,7 @@ export default function WomenDresses() {
   const sizes = ["XS", "S", "M", "L", "XL"];
   const colors = [
     "#000000",
-    "#f8f4f4ff",
+    "#0f0d0d",
     "#d9c9ae",
     "#2b2b3d",
     "#5b4bff",
@@ -559,10 +562,11 @@ export default function WomenDresses() {
               )}
             </div>
 
+            {/* Grid – 4 məhsul, col sayı 3, şəkillər böyük, məsafə azaldıldı */}
             <div
               className={`grid ${
                 viewMode === "grid"
-                  ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[6px]"
+                  ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[6px]"
                   : "grid-cols-1 gap-[6px]"
               }`}
             >
