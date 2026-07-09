@@ -1,6 +1,5 @@
 import { useState } from "react";
 
-// İkonlar (əvvəlki kimi)
 const IconLayoutGrid = ({ size = 16 }) => (
   <svg
     width={size}
@@ -136,7 +135,6 @@ const IconBag = ({ size = 18 }) => (
   </svg>
 );
 
-// YALNIZ 4 MƏHSUL (id 5 və 6 silindi)
 const products = [
   {
     id: 1,
