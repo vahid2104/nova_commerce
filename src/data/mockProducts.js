@@ -173,7 +173,7 @@ export const mockProducts = [
     "isNew": false,
     "colors": ["black", "cream", "brown"],
     "sizes": ["XS", "S", "M", "L"],
-    "image": "https://images.unsplash.com/photo-1506629905607-d405b7a30db9?w=800&auto=format&fit=crop"
+    "image": "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&auto=format&fit=crop"
   },
   {
     "id": 14,
@@ -469,7 +469,7 @@ export const mockProducts = [
     "isNew": false,
     "colors": ["white", "cream"],
     "sizes": ["Set of 3"],
-    "image": "https://images.unsplash.com/photo-1602874801006-e26f5e26557a?w=800&auto=format&fit=crop"
+    "image": "https://images.unsplash.com/photo-1499933374294-4584851497cc?w=800&auto=format&fit=crop"
   },
   {
     "id": 36,

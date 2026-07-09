@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { mockProducts } from "../../data/mockProducts";
 
+// ---------- İKONLAR ----------
 const IconLayoutGrid = ({ size = 16 }) => (
   <svg
     width={size}
@@ -135,57 +137,7 @@ const IconBag = ({ size = 18 }) => (
   </svg>
 );
 
-const products = [
-  {
-    id: 1,
-    brand: "ACNE STUDIOS",
-    name: "Asymmetric Midi Dress",
-    price: 450,
-    oldPrice: null,
-    rating: 4,
-    reviews: 24,
-    badge: "NEW",
-    colorDots: ["#1c1c2b", "#e8e2d6"],
-    img: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=600&q=80",
-  },
-  {
-    id: 2,
-    brand: "THE ROW",
-    name: "Silk Maxi Dress",
-    price: 890,
-    oldPrice: 1112,
-    rating: 5,
-    reviews: 112,
-    badge: "-20%",
-    colorDots: ["#f2ede1"],
-    img: "https://images.unsplash.com/photo-1564257631407-4deb1f99d992?w=600&q=80",
-  },
-  {
-    id: 3,
-    brand: "TOTEME",
-    name: "Tailored Blazer Dress",
-    price: 620,
-    oldPrice: null,
-    rating: 4,
-    reviews: 8,
-    badge: null,
-    colorDots: ["#111"],
-    img: "https://images.unsplash.com/photo-1591369822096-ffd140ec948f?w=600&q=80",
-  },
-  {
-    id: 4,
-    brand: "STELLA MCCARTNEY",
-    name: "Floral Print Dress",
-    price: 780,
-    oldPrice: null,
-    rating: 5,
-    reviews: 45,
-    badge: "NEW",
-    colorDots: ["#e8d5b5", "#3a2c1e"],
-    img: "https://images.unsplash.com/photo-1612336307429-8a898d10e223?w=600&q=80",
-  },
-];
-
+// ---------- ULDUZLAR ----------
 function Stars({ count }) {
   return (
     <div className="flex gap-0.5 text-black text-[11px] leading-none">
@@ -196,19 +148,44 @@ function Stars({ count }) {
   );
 }
 
+// ---------- MƏHSUL KARTI (MOCK İLƏ UYĞUN) ----------
 function ProductCard({ p }) {
+  // Şəkil: image (əsas) və ya img (ehtiyat)
+  const imageSrc = p.image || p.img || "";
+
+  // Badge: isNew -> "NEW", əks halda discount varsa "SALE"
+  let badge = "";
+  if (p.isNew) badge = "NEW";
+  else if (p.discount && p.discount > 0) badge = "SALE";
+
+  // Rəylər və ulduzlar
+  const rating = p.stars ?? 0;
+  const reviews = p.reviews ?? 0;
+
+  // Köhnə qiymət (endirim varsa)
+  let oldPrice = p.oldPrice || null;
+  if (!oldPrice && p.discount && p.discount > 0) {
+    oldPrice = Math.round((p.price / (1 - p.discount / 100)) * 100) / 100;
+  }
+
+  // Rəng nöqtələri (ilk 3 rəng)
+  const colorDots = p.colors ? p.colors.slice(0, 3) : [];
+
   return (
     <div className="group cursor-pointer max-w-[260px] mx-auto">
-      {" "}
       <div className="relative aspect-[3/4] bg-white overflow-hidden mb-3">
-        <img src={p.img} alt={p.name} className="w-full h-full object-cover" />
-        {p.badge && (
+        <img
+          src={imageSrc}
+          alt={p.name}
+          className="w-full h-full object-cover"
+        />
+        {badge && (
           <span
             className={`absolute top-3 left-3 text-[10px] font-semibold tracking-wide px-2 py-1 rounded-sm ${
-              p.badge === "NEW" ? "bg-black text-white" : "bg-white text-black"
+              badge === "NEW" ? "bg-black text-white" : "bg-white text-black"
             }`}
           >
-            {p.badge}
+            {badge}
           </span>
         )}
         <button
@@ -219,8 +196,8 @@ function ProductCard({ p }) {
         </button>
       </div>
       <div className="flex items-center gap-1.5 mb-1">
-        <Stars count={p.rating} />
-        <span className="text-[11px] text-neutral-400">({p.reviews})</span>
+        <Stars count={rating} />
+        <span className="text-[11px] text-neutral-400">({reviews})</span>
       </div>
       <p className="text-[11px] tracking-wide text-neutral-500 font-medium mb-0.5">
         {p.brand}
@@ -229,20 +206,20 @@ function ProductCard({ p }) {
       <div className="flex items-center gap-2">
         <span
           className={`text-[14px] font-semibold ${
-            p.oldPrice ? "text-red-600" : "text-neutral-900"
+            oldPrice ? "text-red-600" : "text-neutral-900"
           }`}
         >
           ${p.price}
         </span>
-        {p.oldPrice && (
+        {oldPrice && (
           <span className="text-[13px] text-neutral-400 line-through">
-            ${p.oldPrice}
+            ${oldPrice}
           </span>
         )}
       </div>
-      {p.colorDots && (
+      {colorDots.length > 0 && (
         <div className="flex gap-1 mt-2">
-          {p.colorDots.map((c, i) => (
+          {colorDots.map((c, i) => (
             <span
               key={i}
               className="w-3 h-3 rounded-full border border-neutral-200"
@@ -255,6 +232,7 @@ function ProductCard({ p }) {
   );
 }
 
+// ---------- FİLTR SEKSİYASI ----------
 function FilterSection({ title, children }) {
   return (
     <div className="border-b border-neutral-200 py-5">
@@ -266,6 +244,7 @@ function FilterSection({ title, children }) {
   );
 }
 
+// ---------- HEADER ----------
 function Header() {
   return (
     <header className="w-full max-w-full bg-white border-b border-neutral-200">
@@ -301,6 +280,7 @@ function Header() {
   );
 }
 
+// ---------- FOOTER ----------
 function Footer() {
   return (
     <footer className="w-full max-w-full bg-neutral-50 border-t border-neutral-200 mt-auto">
@@ -327,6 +307,7 @@ function Footer() {
   );
 }
 
+// ---------- ƏSAS SƏHİFƏ ----------
 export default function WomenDresses() {
   const [selectedSize, setSelectedSize] = useState("S");
   const [selectedColor, setSelectedColor] = useState(null);
@@ -343,7 +324,6 @@ export default function WomenDresses() {
     "#5b4bff",
     "#c0392b",
   ];
-
   const sortOptions = [
     "Relevance",
     "Price: Low to High",
@@ -366,26 +346,16 @@ export default function WomenDresses() {
   return (
     <>
       <style>{`
-        html, body {
-          margin: 0;
-          padding: 0;
-          width: 100%;
-          overflow-x: hidden;
-        }
-        #root {
-          width: 100%;
-          overflow-x: hidden;
-        }
-        body {
-          -webkit-text-size-adjust: 100%;
-          text-size-adjust: 100%;
-        }
+        html, body { margin: 0; padding: 0; width: 100%; overflow-x: hidden; }
+        #root { width: 100%; overflow-x: hidden; }
+        body { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
       `}</style>
 
       <div className="flex flex-col min-h-screen w-full max-w-full bg-white overflow-x-hidden">
         <Header />
 
         <div className="w-full max-w-full px-4 sm:px-6 lg:px-10 py-8 flex flex-col lg:flex-row gap-6 lg:gap-10 bg-white flex-1 overflow-x-hidden">
+          {/* Sidebar - Filters */}
           <aside className="w-full lg:w-[220px] shrink-0">
             <div className="flex items-center justify-between mb-4">
               <h3 className="font-semibold text-[15px]">Filters</h3>
@@ -481,6 +451,7 @@ export default function WomenDresses() {
             </FilterSection>
           </aside>
 
+          {/* Main Content */}
           <main className="flex-1 min-w-0 overflow-x-hidden">
             <div className="text-[12px] text-neutral-400 mb-3">
               Home <span className="mx-1">›</span> Women{" "}
@@ -505,21 +476,13 @@ export default function WomenDresses() {
                 <div className="hidden sm:flex border border-neutral-300 rounded-lg overflow-hidden">
                   <button
                     onClick={() => setViewMode("grid")}
-                    className={`p-2 transition ${
-                      viewMode === "grid"
-                        ? "bg-neutral-200"
-                        : "hover:bg-neutral-100"
-                    }`}
+                    className={`p-2 transition ${viewMode === "grid" ? "bg-neutral-200" : "hover:bg-neutral-100"}`}
                   >
                     <IconLayoutGrid size={16} />
                   </button>
                   <button
                     onClick={() => setViewMode("list")}
-                    className={`p-2 transition ${
-                      viewMode === "list"
-                        ? "bg-neutral-200"
-                        : "hover:bg-neutral-100"
-                    }`}
+                    className={`p-2 transition ${viewMode === "list" ? "bg-neutral-200" : "hover:bg-neutral-100"}`}
                   >
                     <IconList size={16} />
                   </button>
@@ -566,7 +529,7 @@ export default function WomenDresses() {
                   : "grid-cols-1 gap-[6px]"
               }`}
             >
-              {products.map((p) => (
+              {mockProducts.map((p) => (
                 <ProductCard key={p.id} p={p} />
               ))}
             </div>

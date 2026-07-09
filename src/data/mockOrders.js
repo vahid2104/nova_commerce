@@ -170,7 +170,7 @@ export const mockOrders = [
         "brand": "Calm Aura",
         "price": 29.99,
         "quantity": 1,
-        "image": "https://images.unsplash.com/photo-1602874801006-e26f5e26557a?w=800&auto=format&fit=crop"
+        "image": "https://images.unsplash.com/photo-1499933374294-4584851497cc?w=800&auto=format&fit=crop"
       },
       {
         "productId": 39,
