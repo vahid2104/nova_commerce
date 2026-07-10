@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useParams } from "react-router-dom";
 import AccountLayout from "../layouts/AccountLayout";
 import MainLayout from "../layouts/MainLayout";
 
@@ -32,9 +32,23 @@ import ReturnExchangeWizard from "../pages/support/ReturnExchangeWizard";
 
 import EmptyStateShowcase from "../pages/showcase/EmptyStateShowcase";
 
+// ⬇️ Birbaşa SearchOverlay-i import edin
+import SearchOverlay from "../pages/products/SearchOverlay";
+
+function SearchOverlayRedirect() {
+  const { searchTerm } = useParams();
+  return (
+    <SearchOverlay
+      onClose={() => window.history.back()}
+      initialQuery={searchTerm}
+    />
+  );
+}
+
 export default function AppRoutes() {
   return (
     <Routes>
+      {/* 1. Əsas layout – MainLayout ilə olan bütün səhifələr */}
       <Route path="/" element={<MainLayout />}>
         <Route index element={<Home />} />
 
@@ -69,9 +83,13 @@ export default function AppRoutes() {
         />
 
         <Route path="empty-state" element={<EmptyStateShowcase />} />
-
-        <Route path="*" element={<NotFound />} />
       </Route>
+      <Route
+        path="search/overlay"
+        element={<SearchOverlay onClose={() => window.history.back()} />}
+      />
+      <Route path=":searchTerm" element={<SearchOverlayRedirect />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }

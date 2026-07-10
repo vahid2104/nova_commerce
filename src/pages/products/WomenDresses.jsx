@@ -137,7 +137,6 @@ const IconBag = ({ size = 18 }) => (
   </svg>
 );
 
-// ---------- ULDUZLAR ----------
 function Stars({ count }) {
   return (
     <div className="flex gap-0.5 text-black text-[11px] leading-none">
@@ -148,27 +147,21 @@ function Stars({ count }) {
   );
 }
 
-// ---------- MƏHSUL KARTI (MOCK İLƏ UYĞUN) ----------
 function ProductCard({ p }) {
-  // Şəkil: image (əsas) və ya img (ehtiyat)
   const imageSrc = p.image || p.img || "";
 
-  // Badge: isNew -> "NEW", əks halda discount varsa "SALE"
   let badge = "";
   if (p.isNew) badge = "NEW";
   else if (p.discount && p.discount > 0) badge = "SALE";
 
-  // Rəylər və ulduzlar
   const rating = p.stars ?? 0;
   const reviews = p.reviews ?? 0;
 
-  // Köhnə qiymət (endirim varsa)
   let oldPrice = p.oldPrice || null;
   if (!oldPrice && p.discount && p.discount > 0) {
     oldPrice = Math.round((p.price / (1 - p.discount / 100)) * 100) / 100;
   }
 
-  // Rəng nöqtələri (ilk 3 rəng)
   const colorDots = p.colors ? p.colors.slice(0, 3) : [];
 
   return (
@@ -232,7 +225,6 @@ function ProductCard({ p }) {
   );
 }
 
-// ---------- FİLTR SEKSİYASI ----------
 function FilterSection({ title, children }) {
   return (
     <div className="border-b border-neutral-200 py-5">
@@ -244,7 +236,6 @@ function FilterSection({ title, children }) {
   );
 }
 
-// ---------- HEADER ----------
 function Header() {
   return (
     <header className="w-full max-w-full bg-white border-b border-neutral-200">
@@ -280,7 +271,6 @@ function Header() {
   );
 }
 
-// ---------- FOOTER ----------
 function Footer() {
   return (
     <footer className="w-full max-w-full bg-neutral-50 border-t border-neutral-200 mt-auto">
@@ -307,7 +297,6 @@ function Footer() {
   );
 }
 
-// ---------- ƏSAS SƏHİFƏ ----------
 export default function WomenDresses() {
   const [selectedSize, setSelectedSize] = useState("S");
   const [selectedColor, setSelectedColor] = useState(null);
@@ -355,7 +344,6 @@ export default function WomenDresses() {
         <Header />
 
         <div className="w-full max-w-full px-4 sm:px-6 lg:px-10 py-8 flex flex-col lg:flex-row gap-6 lg:gap-10 bg-white flex-1 overflow-x-hidden">
-          {/* Sidebar - Filters */}
           <aside className="w-full lg:w-[220px] shrink-0">
             <div className="flex items-center justify-between mb-4">
               <h3 className="font-semibold text-[15px]">Filters</h3>
@@ -451,7 +439,6 @@ export default function WomenDresses() {
             </FilterSection>
           </aside>
 
-          {/* Main Content */}
           <main className="flex-1 min-w-0 overflow-x-hidden">
             <div className="text-[12px] text-neutral-400 mb-3">
               Home <span className="mx-1">›</span> Women{" "}

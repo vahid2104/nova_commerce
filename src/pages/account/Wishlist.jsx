@@ -1,6 +1,7 @@
 import { mockProducts } from "../../data/mockProducts";
 import WishlistContentHeader from "../../components/wishlist/WishlistContentHeader";
 import WishlistTabs from "../../components/wishlist/WishlistTabs";
+import { useCart } from "../../context/CartContext";
 
 const IconHeart = ({ size = 16, filled = false }) => (
   <svg
@@ -109,8 +110,11 @@ function WishlistCard({ product, onAddToCart, onRemove }) {
 }
 
 export default function Wishlist() {
+  const { addItem } = useCart();
+
   const handleAddToCart = (product) => {
     console.info("Add to cart:", product.name);
+    addItem(product);
   };
 
   const handleRemove = (product) => {
