@@ -8,7 +8,7 @@ import ProductList from "../pages/products/ProductList";
 import ProductDetail from "../pages/products/ProductDetail";
 import SearchResults from "../pages/products/SearchResults";
 import BrandStore from "../pages/products/BrandStore";
-import FlashSale from "../pages/products/FlashSale";
+import FlashSale from "../pages/products/flashSale/FlashSale";
 
 import ShoppingCart from "../pages/cart/ShoppingCart";
 
